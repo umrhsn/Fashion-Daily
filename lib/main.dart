@@ -1,3 +1,4 @@
+import 'package:fashion_daily/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(),
+      home: const SignInScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
