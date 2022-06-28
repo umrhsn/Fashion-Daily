@@ -1,3 +1,3 @@
-# fashion_daily
+# Fashion Daily
 
-A new Flutter project.
+Sign in Register test
