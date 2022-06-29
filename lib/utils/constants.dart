@@ -6,5 +6,8 @@ class Constants {
   static const Color kButtonBlue = Color(0xFF3586FE);
   static const Color kPink = Color(0xFFE168D2);
   static const Color kYellow = Color(0xFFF6CC6A);
-  static const Color kLightGrey = Color(0xFFDDDDDF);
+  static const Color kFillGrey = Color(0xFFFDFCFF);
+  static const Color kLightGrey = Color(0xFFF2F1F4);
+  static const Color kMediumGrey = Color(0xFFD2D3D6);
+  static const Color kDarkGrey = Color(0xFF6A6B76);
 }
