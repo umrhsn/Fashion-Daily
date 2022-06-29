@@ -1,7 +1,11 @@
 import 'dart:math';
 
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:fashion_daily/utils/constants.dart';
+import 'package:fashion_daily/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/custom_stack.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -11,6 +15,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,87 +24,96 @@ class _SignInScreenState extends State<SignInScreen> {
           // TODO:
           //   - make stack reusable
           //   - make sizes and translation values flexible via MediaQuery
-          ClipRRect(
-            child: Stack(
+          //   currently it's just moved to another file to lessen the widget tree size
+          const CustomStack(),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+            child: Column(
               children: [
-                Container(
-                  height: MediaQuery.of(context).size.height / 3,
-                  width: double.infinity,
-                  color: Constants.kBlue,
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Welcome to Fashion Daily',
+                      style: TextStyle(color: Colors.grey)),
                 ),
-                Transform.rotate(
-                  angle: pi / 14,
-                  child: Container(
-                    height: 170,
-                    width: 170,
-                    color: Constants.kPink,
-                    transform: Matrix4.translationValues(-80.0, -10.0, 0.0),
-                  ),
+                SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Sign in',
+                      style: TextStyle(fontSize: 40),
+                    ),
+                    Row(
+                      children: const [
+                        Text(
+                          'Help',
+                          style: TextStyle(
+                              color: Constants.kButtonBlue, fontSize: 15),
+                        ),
+                        SizedBox(width: 5),
+                        Icon(
+                          Icons.help,
+                          color: Constants.kButtonBlue,
+                        )
+                      ],
+                    ),
+                  ],
                 ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    transform: Matrix4.translationValues(20.0, -65.0, 0.0),
-                    child: Transform.rotate(
-                      angle: -pi / 6,
-                      child: const Image(
-                        height: 180,
-                        width: 180,
-                        color: Constants.kLightBlue,
-                        image: AssetImage('assets/images/dotted_square.png'),
-                        fit: BoxFit.fill,
+                SizedBox(height: 20),
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Phone Number',
+                        style: TextStyle(color: Colors.grey, fontSize: 15),
                       ),
                     ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Transform.rotate(
-                    alignment: Alignment.bottomRight,
-                    angle: pi / 8,
-                    child: Container(
-                      height: 165,
-                      width: 165,
-                      color: Constants.kYellow,
-                      transform: Matrix4.translationValues(120.0, 155.0, 0.0),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      key: _formKey,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        fillColor: Constants.kFillGrey,
+                        prefixIcon: CountryCodePicker(
+                          onChanged: print,
+                          initialSelection: 'EG',
+                          favorite: ['+20', 'EG'],
+                          showFlagDialog: false,
+                          showFlag: false,
+                          showDropDownButton: true,
+                        ),
+                        border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Constants.kLightGrey)),
+                        hintText: 'Eg. 812345678',
+                        hintStyle: TextStyle(color: Constants.kMediumGrey),
+                      ),
                     ),
-                  ),
+                    SizedBox(height: 15),
+                  ],
                 ),
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Transform(
-                    transform: Matrix4.translationValues(120, 165, 0),
-                    child: ClipOval(
-                      child: Container(
-                          height: 90, width: 90, color: Constants.kLightBlue),
-                    ),
-                  ),
-                )
+                CustomButton(text: 'Sign In', onPressed: () {}),
+                SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(child: Divider()),
+                    Text('Or'),
+                    Flexible(child: Divider())
+                  ],
+                ),
+                SizedBox(height: 15),
+                CustomButton(
+                  text: 'Sign in by Google',
+                  onPressed: () {},
+                  isOutlined: true,
+                  isIconed: true,
+                ),
               ],
             ),
-          ),
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text('Welcome to Fashion Daily',
-                style: TextStyle(color: Colors.grey)),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('Sign in'),
-              Row(
-                children: const [
-                  Text(
-                    'Help',
-                    style: TextStyle(color: Constants.kButtonBlue),
-                  ),
-                  Icon(
-                    Icons.help,
-                    color: Constants.kButtonBlue,
-                  )
-                ],
-              )
-            ],
           )
         ],
       ),
