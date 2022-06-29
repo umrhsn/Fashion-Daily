@@ -13,6 +13,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +44,19 @@ class _SignInScreenState extends State<SignInScreen> {
                     color: Constants.kButtonBlue,
                   )
                 ],
-              )
+              ),
             ],
-          )
+          ),
+          TextFormField(
+            key: _formKey,
+            keyboardType: TextInputType.phone,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Constants.kLightGrey)),
+              hintText: 'Eg. 812345678',
+              hintStyle: TextStyle(color: Constants.kLightGrey),
+            ),
+          ),
         ],
       ),
     );
