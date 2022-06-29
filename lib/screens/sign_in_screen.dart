@@ -66,6 +66,15 @@ class _SignInScreenState extends State<SignInScreen> {
               hintStyle: TextStyle(color: Constants.kLightGrey),
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Flexible(child: Divider()),
+              Text('Or'),
+              Flexible(child: Divider())
+            ],
+          ),
         ],
       ),
     );
