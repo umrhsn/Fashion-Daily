@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:fashion_daily/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +52,14 @@ class _SignInScreenState extends State<SignInScreen> {
             key: _formKey,
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
+              prefixIcon: CountryCodePicker(
+                onChanged: print,
+                initialSelection: 'EG',
+                favorite: ['+20', 'EG'],
+                showFlagDialog: false,
+                showFlag: false,
+                showDropDownButton: true,
+              ),
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Constants.kLightGrey)),
               hintText: 'Eg. 812345678',
