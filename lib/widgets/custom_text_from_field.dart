@@ -39,7 +39,7 @@ class CustomTextFormField extends StatelessWidget {
             focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Constants.kButtonBlue)),
             enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Constants.kLightGrey)),
+                borderSide: BorderSide(color: Constants.kMediumGrey)),
             errorBorder: const OutlineInputBorder(),
             fillColor: Constants.kFillGrey,
             prefixIcon: prefixIcon,
