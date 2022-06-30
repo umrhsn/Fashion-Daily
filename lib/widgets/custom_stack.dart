@@ -4,38 +4,48 @@ import 'package:fashion_daily/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomStack extends StatelessWidget {
+  final double factor;
+  final bool backButton;
+  final void Function()? backButtonOnTap;
+
   const CustomStack({
     Key? key,
+    required this.factor,
+    this.backButton = false,
+    this.backButtonOnTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return ClipRRect(
       child: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height / 3,
+            height: height * factor,
             width: double.infinity,
             color: Constants.kBlue,
           ),
           Transform.rotate(
             angle: pi / 14,
             child: Container(
-              height: 170,
-              width: 170,
+              height: height * 0.6 * factor,
+              width: height * 0.6 * factor,
               color: Constants.kPink,
-              transform: Matrix4.translationValues(-80.0, -10.0, 0.0),
+              transform: Matrix4.translationValues(
+                  -height / 3.8 * factor, -height / 70 * factor, 0),
             ),
           ),
           Align(
             alignment: Alignment.topRight,
             child: Container(
-              transform: Matrix4.translationValues(20.0, -65.0, 0.0),
+              transform: Matrix4.translationValues(
+                  height / 15 * factor, -height / 5 * factor, 0.0),
               child: Transform.rotate(
                 angle: -pi / 6,
-                child: const Image(
-                  height: 180,
-                  width: 180,
+                child: Image(
+                  height: height * 0.6 * factor,
+                  width: height * 0.6 * factor,
                   color: Constants.kLightBlue,
                   image: AssetImage('assets/images/dotted_square.png'),
                   fit: BoxFit.fill,
@@ -49,23 +59,51 @@ class CustomStack extends StatelessWidget {
               alignment: Alignment.bottomRight,
               angle: pi / 8,
               child: Container(
-                height: 165,
-                width: 165,
+                height: height * 0.55 * factor,
+                width: height * 0.55 * factor,
                 color: Constants.kYellow,
-                transform: Matrix4.translationValues(120.0, 155.0, 0.0),
+                transform: Matrix4.translationValues(
+                    height / 2.6 * factor, height / 2 * factor, 0.0),
               ),
             ),
           ),
           Align(
             alignment: Alignment.bottomLeft,
             child: Transform(
-              transform: Matrix4.translationValues(120, 165, 0),
+              transform: Matrix4.translationValues(
+                  height / 2.5 * factor, height / 1.9 * factor, 0),
               child: ClipOval(
                 child: Container(
-                    height: 90, width: 90, color: Constants.kLightBlue),
+                  height: height * 0.34 * factor,
+                  width: height * 0.34 * factor,
+                  color: Constants.kLightBlue,
+                ),
               ),
             ),
-          )
+          ),
+          InkWell(
+            onTap: backButtonOnTap,
+            child: Transform(
+              transform: Matrix4.translationValues(
+                  height / 4 * factor, height / 2 * factor, 0),
+              child: Container(
+                  height: 40,
+                  width: 40,
+                  child: backButton
+                      ? ClipOval(
+                          child: Container(
+                              color: Colors.black,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: Colors.white,
+                                  size: height / 40,
+                                ),
+                              )))
+                      : null),
+            ),
+          ),
         ],
       ),
     );

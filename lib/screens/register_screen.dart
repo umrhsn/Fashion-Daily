@@ -1,23 +1,20 @@
-import 'dart:math';
-
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:fashion_daily/screens/register_screen.dart';
+import 'package:fashion_daily/screens/sign_in_screen.dart';
 import 'package:fashion_daily/utils/constants.dart';
 import 'package:fashion_daily/widgets/custom_button.dart';
+import 'package:fashion_daily/widgets/custom_stack.dart';
 import 'package:fashion_daily/widgets/custom_text_from_field.dart';
 import 'package:fashion_daily/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/custom_stack.dart';
-
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -28,7 +25,11 @@ class _SignInScreenState extends State<SignInScreen> {
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          const CustomStack(factor: 1 / 3),
+          CustomStack(
+            factor: 1 / 7,
+            backButton: true,
+            backButtonOnTap: () => Navigator.pop(context),
+          ),
           Flexible(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
@@ -45,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Sign in',
+                        'Register',
                         style: TextStyle(fontSize: height * 0.043),
                       ),
                       const Spacer(),
@@ -62,12 +63,18 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ],
                   ),
-                  const Spacer(flex: 2),
-                  Column(
-                    children: [
-                      Form(
-                        key: _formKey,
-                        child: CustomTextFormField(
+                  const Spacer(),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        CustomTextFormField(
+                          headerText: 'Email',
+                          headerFontSize: fontSizeSmall,
+                          inputType: TextInputType.emailAddress,
+                          hintText: 'Eg. example@email.com',
+                        ),
+                        CustomTextFormField(
                           headerText: 'Phone Number',
                           headerFontSize: fontSizeSmall,
                           inputType: TextInputType.phone,
@@ -81,11 +88,17 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           hintText: 'Eg. 812345678',
                         ),
-                      ),
-                    ],
+                        CustomTextFormField(
+                          headerText: 'Password',
+                          headerFontSize: fontSizeSmall,
+                          inputType: TextInputType.visiblePassword,
+                          hintText: 'Password',
+                        ),
+                      ],
+                    ),
                   ),
-                  const Spacer(),
-                  CustomButton(text: 'Sign In', onPressed: () {}),
+                  const Spacer(flex: 2),
+                  CustomButton(text: 'Register', onPressed: () {}),
                   const Spacer(),
                   const TextDivider(text: 'Or'),
                   const Spacer(),
@@ -100,7 +113,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don\'t have an account? ',
+                        'Already have an account? ',
                         style: TextStyle(fontSize: fontSizeSmall),
                       ),
                       InkWell(
@@ -108,9 +121,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (builder) => RegisterScreen()));
+                                  builder: (builder) => const SignInScreen()));
                         },
-                        child: Text('Register here',
+                        child: Text('Sign in here',
                             style: TextStyle(
                                 color: Constants.kButtonBlue,
                                 fontSize: fontSizeSmall)),
@@ -118,14 +131,24 @@ class _SignInScreenState extends State<SignInScreen> {
                     ],
                   ),
                   const Spacer(flex: 2),
-                  const Center(
-                    child: Text(
-                      'Use the application according to policy rules. Any kinds of violations will be subject to sanctions.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                  Column(
+                    children: [
+                      const Center(
+                        child: Text(
+                          'By registering your account, you are agreeing to our',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Center(
+                          child: Text(
+                        'terms and conditions',
+                        style: TextStyle(color: Constants.kButtonBlue),
+                      ))
+                    ],
                   ),
-                  const Spacer()
+                  const Spacer(flex: 2)
                 ],
               ),
             ),
