@@ -39,6 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Text(
                       'Sign in',
@@ -111,6 +112,28 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () {},
                   isOutlined: true,
                   isIconed: true,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Don\'t have an account? ',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Text('Register here',
+                          style: TextStyle(
+                              color: Constants.kButtonBlue, fontSize: 16))
+                    ],
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    'Use the application according to policy rules. Any kinds of violations will be subject to sanctions.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ),
               ],
             ),
