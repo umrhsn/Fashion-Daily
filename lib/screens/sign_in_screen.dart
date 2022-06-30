@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:fashion_daily/utils/constants.dart';
 import 'package:fashion_daily/widgets/custom_button.dart';
+import 'package:fashion_daily/widgets/custom_text_from_field.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_stack.dart';
@@ -82,29 +83,17 @@ class _SignInScreenState extends State<SignInScreen> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            TextFormField(
-                              keyboardType: TextInputType.phone,
-                              decoration: InputDecoration(
-                                focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Constants.kButtonBlue)),
-                                enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Constants.kLightGrey)),
-                                errorBorder: const OutlineInputBorder(),
-                                fillColor: Constants.kFillGrey,
-                                prefixIcon: CountryCodePicker(
-                                  onChanged: print,
-                                  initialSelection: 'EG',
-                                  favorite: const ['+20', 'EG'],
-                                  showFlagDialog: false,
-                                  showFlag: false,
-                                  showDropDownButton: true,
-                                ),
-                                hintText: 'Eg. 812345678',
-                                hintStyle: const TextStyle(
-                                    color: Constants.kMediumGrey),
+                            CustomTextFormField(
+                              inputType: TextInputType.phone,
+                              prefixIcon: CountryCodePicker(
+                                onChanged: print,
+                                initialSelection: 'EG',
+                                favorite: const ['+20', 'EG'],
+                                showFlagDialog: false,
+                                showFlag: false,
+                                showDropDownButton: true,
                               ),
+                              hintText: 'Eg. 812345678',
                             ),
                           ],
                         ),
