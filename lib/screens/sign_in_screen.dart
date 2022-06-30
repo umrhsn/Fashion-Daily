@@ -4,6 +4,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:fashion_daily/utils/constants.dart';
 import 'package:fashion_daily/widgets/custom_button.dart';
 import 'package:fashion_daily/widgets/custom_text_from_field.dart';
+import 'package:fashion_daily/widgets/text_divider.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_stack.dart';
@@ -99,17 +100,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   const Spacer(),
                   CustomButton(text: 'Sign In', onPressed: () {}),
                   const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Flexible(child: Divider()),
-                      SizedBox(width: 20),
-                      Text('Or', style: TextStyle(color: Colors.grey)),
-                      SizedBox(width: 20),
-                      Flexible(child: Divider())
-                    ],
-                  ),
+                  const TextDivider(text: 'Or'),
                   const Spacer(),
                   CustomButton(
                     text: 'Sign in by Google',
