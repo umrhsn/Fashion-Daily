@@ -18,7 +18,12 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final fontSizeSmall = height * 0.0165;
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           // TODO:
@@ -26,116 +31,135 @@ class _SignInScreenState extends State<SignInScreen> {
           //   - make sizes and translation values flexible via MediaQuery
           //   currently it's just moved to another file to lessen the widget tree size
           const CustomStack(),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-            child: Column(
-              children: [
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Welcome to Fashion Daily',
-                      style: TextStyle(color: Colors.grey)),
-                ),
-                SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Sign in',
-                      style: TextStyle(fontSize: 40),
-                    ),
-                    Row(
-                      children: const [
-                        Text(
-                          'Help',
-                          style: TextStyle(
-                              color: Constants.kButtonBlue, fontSize: 15),
-                        ),
-                        SizedBox(width: 5),
-                        Icon(
-                          Icons.help,
-                          color: Constants.kButtonBlue,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Phone Number',
-                        style: TextStyle(color: Colors.grey, fontSize: 15),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Welcome to Fashion Daily',
+                        style: TextStyle(color: Colors.grey)),
+                  ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sign in',
+                        style: TextStyle(fontSize: height * 0.043),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      key: _formKey,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                        fillColor: Constants.kFillGrey,
-                        prefixIcon: CountryCodePicker(
-                          onChanged: print,
-                          initialSelection: 'EG',
-                          favorite: ['+20', 'EG'],
-                          showFlagDialog: false,
-                          showFlag: false,
-                          showDropDownButton: true,
-                        ),
-                        border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Constants.kLightGrey)),
-                        hintText: 'Eg. 812345678',
-                        hintStyle: TextStyle(color: Constants.kMediumGrey),
+                      const Spacer(),
+                      Text(
+                        'Help',
+                        style: TextStyle(
+                            color: Constants.kButtonBlue,
+                            fontSize: fontSizeSmall),
                       ),
-                    ),
-                    SizedBox(height: 15),
-                  ],
-                ),
-                CustomButton(text: 'Sign In', onPressed: () {}),
-                SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Flexible(child: Divider()),
-                    Text('Or'),
-                    Flexible(child: Divider())
-                  ],
-                ),
-                SizedBox(height: 15),
-                CustomButton(
-                  text: 'Sign in by Google',
-                  onPressed: () {},
-                  isOutlined: true,
-                  isIconed: true,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Row(
+                      const SizedBox(width: 5),
+                      const Icon(
+                        Icons.help,
+                        color: Constants.kButtonBlue,
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Phone Number',
+                            style: TextStyle(
+                                color: Colors.grey, fontSize: fontSizeSmall),
+                          ),
+                        ),
+                      ),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              keyboardType: TextInputType.phone,
+                              decoration: InputDecoration(
+                                focusedBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Constants.kButtonBlue)),
+                                enabledBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Constants.kLightGrey)),
+                                errorBorder: const OutlineInputBorder(),
+                                fillColor: Constants.kFillGrey,
+                                prefixIcon: CountryCodePicker(
+                                  onChanged: print,
+                                  initialSelection: 'EG',
+                                  favorite: const ['+20', 'EG'],
+                                  showFlagDialog: false,
+                                  showFlag: false,
+                                  showDropDownButton: true,
+                                ),
+                                hintText: 'Eg. 812345678',
+                                hintStyle: const TextStyle(
+                                    color: Constants.kMediumGrey),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  CustomButton(text: 'Sign In', onPressed: () {}),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Flexible(child: Divider()),
+                      SizedBox(width: 20),
+                      Text('Or', style: TextStyle(color: Colors.grey)),
+                      SizedBox(width: 20),
+                      Flexible(child: Divider())
+                    ],
+                  ),
+                  const Spacer(),
+                  CustomButton(
+                    text: 'Sign in by Google',
+                    onPressed: () {},
+                    isOutlined: true,
+                    isIconed: true,
+                  ),
+                  const Spacer(flex: 2),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Don\'t have an account? ',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: fontSizeSmall),
                       ),
-                      Text('Register here',
-                          style: TextStyle(
-                              color: Constants.kButtonBlue, fontSize: 16))
+                      InkWell(
+                        onTap: () {},
+                        child: Text('Register here',
+                            style: TextStyle(
+                                color: Constants.kButtonBlue,
+                                fontSize: fontSizeSmall)),
+                      )
                     ],
                   ),
-                ),
-                Center(
-                  child: Text(
-                    'Use the application according to policy rules. Any kinds of violations will be subject to sanctions.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.grey),
+                  const Spacer(flex: 2),
+                  const Center(
+                    child: Text(
+                      'Use the application according to policy rules. Any kinds of violations will be subject to sanctions.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ),
-                ),
-              ],
+                  const Spacer()
+                ],
+              ),
             ),
           )
         ],
