@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:fashion_daily/screens/sign_in_screen.dart';
 import 'package:fashion_daily/utils/constants.dart';
 import 'package:fashion_daily/widgets/custom_button.dart';
 import 'package:fashion_daily/widgets/custom_stack.dart';
@@ -18,14 +19,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     final fontSizeSmall = height * 0.0165;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          const CustomStack(factor: 1 / 3),
+          CustomStack(
+            factor: 1 / 7,
+            backButton: true,
+            backButtonOnTap: () => Navigator.pop(context),
+          ),
           Flexible(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
@@ -42,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Sign in',
+                        'Register',
                         style: TextStyle(fontSize: height * 0.043),
                       ),
                       const Spacer(),
@@ -59,43 +63,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ],
                   ),
-                  const Spacer(flex: 2),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Phone Number',
-                            style: TextStyle(
-                                color: Colors.grey, fontSize: fontSizeSmall),
-                          ),
-                        ),
-                      ),
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            CustomTextFormField(
-                              inputType: TextInputType.phone,
-                              prefixIcon: CountryCodePicker(
-                                onChanged: print,
-                                initialSelection: 'EG',
-                                favorite: const ['+20', 'EG'],
-                                showFlagDialog: false,
-                                showFlag: false,
-                                showDropDownButton: true,
-                              ),
-                              hintText: 'Eg. 812345678',
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
                   const Spacer(),
-                  CustomButton(text: 'Sign In', onPressed: () {}),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        CustomTextFormField(
+                          headerText: 'Email',
+                          headerFontSize: fontSizeSmall,
+                          inputType: TextInputType.emailAddress,
+                          hintText: 'Eg. example@email.com',
+                        ),
+                        CustomTextFormField(
+                          headerText: 'Phone Number',
+                          headerFontSize: fontSizeSmall,
+                          inputType: TextInputType.phone,
+                          prefixIcon: CountryCodePicker(
+                            onChanged: print,
+                            initialSelection: 'EG',
+                            favorite: const ['+20', 'EG'],
+                            showFlagDialog: false,
+                            showFlag: false,
+                            showDropDownButton: true,
+                          ),
+                          hintText: 'Eg. 812345678',
+                        ),
+                        CustomTextFormField(
+                          headerText: 'Password',
+                          headerFontSize: fontSizeSmall,
+                          inputType: TextInputType.visiblePassword,
+                          hintText: 'Password',
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(flex: 2),
+                  CustomButton(text: 'Register', onPressed: () {}),
                   const Spacer(),
                   const TextDivider(text: 'Or'),
                   const Spacer(),
@@ -110,7 +113,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don\'t have an account? ',
+                        'Already have an account? ',
                         style: TextStyle(fontSize: fontSizeSmall),
                       ),
                       InkWell(
@@ -118,9 +121,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (builder) => RegisterScreen()));
+                                  builder: (builder) => const SignInScreen()));
                         },
-                        child: Text('Register here',
+                        child: Text('Sign in here',
                             style: TextStyle(
                                 color: Constants.kButtonBlue,
                                 fontSize: fontSizeSmall)),
@@ -128,14 +131,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ],
                   ),
                   const Spacer(flex: 2),
-                  const Center(
-                    child: Text(
-                      'Use the application according to policy rules. Any kinds of violations will be subject to sanctions.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                  Column(
+                    children: [
+                      const Center(
+                        child: Text(
+                          'By registering your account, you are agreeing to our',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Center(
+                          child: Text(
+                        'terms and conditions',
+                        style: TextStyle(color: Constants.kButtonBlue),
+                      ))
+                    ],
                   ),
-                  const Spacer()
+                  const Spacer(flex: 2)
                 ],
               ),
             ),

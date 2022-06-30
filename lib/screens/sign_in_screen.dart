@@ -22,7 +22,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     final fontSizeSmall = height * 0.0165;
 
     return Scaffold(
@@ -66,34 +65,21 @@ class _SignInScreenState extends State<SignInScreen> {
                   const Spacer(flex: 2),
                   Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Phone Number',
-                            style: TextStyle(
-                                color: Colors.grey, fontSize: fontSizeSmall),
-                          ),
-                        ),
-                      ),
                       Form(
                         key: _formKey,
-                        child: Column(
-                          children: [
-                            CustomTextFormField(
-                              inputType: TextInputType.phone,
-                              prefixIcon: CountryCodePicker(
-                                onChanged: print,
-                                initialSelection: 'EG',
-                                favorite: const ['+20', 'EG'],
-                                showFlagDialog: false,
-                                showFlag: false,
-                                showDropDownButton: true,
-                              ),
-                              hintText: 'Eg. 812345678',
-                            ),
-                          ],
+                        child: CustomTextFormField(
+                          headerText: 'Phone Number',
+                          headerFontSize: fontSizeSmall,
+                          inputType: TextInputType.phone,
+                          prefixIcon: CountryCodePicker(
+                            onChanged: print,
+                            initialSelection: 'EG',
+                            favorite: const ['+20', 'EG'],
+                            showFlagDialog: false,
+                            showFlag: false,
+                            showDropDownButton: true,
+                          ),
+                          hintText: 'Eg. 812345678',
                         ),
                       ),
                     ],

@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 
 class CustomStack extends StatelessWidget {
   final double factor;
+  final bool backButton;
+  final void Function()? backButtonOnTap;
 
   const CustomStack({
     Key? key,
     required this.factor,
+    this.backButton = false,
+    this.backButtonOnTap,
   }) : super(key: key);
 
   @override
@@ -76,7 +80,30 @@ class CustomStack extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          InkWell(
+            onTap: backButtonOnTap,
+            child: Transform(
+              transform: Matrix4.translationValues(
+                  height / 4 * factor, height / 2 * factor, 0),
+              child: Container(
+                  height: 40,
+                  width: 40,
+                  child: backButton
+                      ? ClipOval(
+                          child: Container(
+                              color: Colors.black,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: Colors.white,
+                                  size: height / 40,
+                                ),
+                              )))
+                      : null),
+            ),
+          ),
         ],
       ),
     );
