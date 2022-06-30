@@ -27,11 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          // TODO:
-          //   - make stack reusable
-          //   - make sizes and translation values flexible via MediaQuery
-          //   currently it's just moved to another file to lessen the widget tree size
-          const CustomStack(),
+          const CustomStack(factor: 1 / 3),
           Flexible(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
@@ -65,7 +61,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ],
                   ),
-                  const Spacer(),
+                  const Spacer(flex: 2),
                   Column(
                     children: [
                       Padding(
