@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:fashion_daily/screens/register_screen.dart';
 import 'package:fashion_daily/utils/constants.dart';
 import 'package:fashion_daily/widgets/custom_button.dart';
 import 'package:fashion_daily/widgets/custom_text_from_field.dart';
@@ -117,7 +118,12 @@ class _SignInScreenState extends State<SignInScreen> {
                         style: TextStyle(fontSize: fontSizeSmall),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) => RegisterScreen()));
+                        },
                         child: Text('Register here',
                             style: TextStyle(
                                 color: Constants.kButtonBlue,
