@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? hintText;
   final String headerText;
   final double headerFontSize;
+  final bool isPassword;
 
   const CustomTextFormField({
     Key? key,
@@ -15,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     required this.headerFontSize,
     required this.headerText,
+    this.isPassword = false,
   }) : super(key: key);
 
   @override
@@ -41,6 +43,9 @@ class CustomTextFormField extends StatelessWidget {
             errorBorder: const OutlineInputBorder(),
             fillColor: Constants.kFillGrey,
             prefixIcon: prefixIcon,
+            suffixIcon: isPassword
+                ? Icon(Icons.remove_red_eye, color: Colors.black)
+                : null,
             hintText: hintText,
             hintStyle: hintText != null
                 ? const TextStyle(color: Constants.kMediumGrey)
